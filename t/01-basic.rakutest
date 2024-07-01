@@ -1,7 +1,7 @@
 use Test;
 use Method::Protected;
 
-plan 1;
+plan 2;
 
 my @words = "a" … "zzz";
 
@@ -21,6 +21,27 @@ start { loop { $frobnicator.pick } }
 # eating away all CPU
 sleep .1 until $frobnicator.hash.elems == @words.elems;
 
-pass "Survived hammering a hash";
+pass "Survived hammering a hash with Frobnicate";
+
+class Grabonize {
+    has %!hash;
+    proto method pick(|) is protected {*}
+    multi method pick(Int) { %!hash{@words.pick}++ }
+    multi method pick(Str) { %!hash{@words.pick}++ }
+    multi method pick(Rat) { %!hash{@words.pick}++ }
+    method hash() is protected { %!hash.clone          }
+}
+
+# Set up 3 threads massively updating a single hash
+my $grabonizer = Grabonize.new;
+start { loop { $grabonizer.pick(42)    } }
+start { loop { $grabonizer.pick("foo") } }
+start { loop { $grabonizer.pick(1.37)  } }
+
+# Wait until all words have been done at least once, without
+# eating away all CPU
+sleep .1 until $grabonizer.hash.elems == @words.elems;
+
+pass "Survived hammering a hash with Grabonize";
 
 # vim: expandtab shiftwidth=4
