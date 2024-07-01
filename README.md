@@ -1,4 +1,4 @@
-[![Actions Status](https://github.com/lizmat/Method-Protected/actions/workflows/test.yml/badge.svg)](https://github.com/lizmat/Method-Protected/actions)
+[![Actions Status](https://github.com/lizmat/Method-Protected/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/lizmat/Method-Protected/actions) [![Actions Status](https://github.com/lizmat/Method-Protected/actions/workflows/macos.yml/badge.svg)](https://github.com/lizmat/Method-Protected/actions) [![Actions Status](https://github.com/lizmat/Method-Protected/actions/workflows/windows.yml/badge.svg)](https://github.com/lizmat/Method-Protected/actions)
 
 NAME
 ====
