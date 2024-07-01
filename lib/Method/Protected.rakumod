@@ -49,11 +49,9 @@ start { loop { $frobnicator.pick }
 start { loop { $frobnicator.pick }
 
 # Start reporter
-await start {
-    until $frobnicator.hash.elems == @words.elems {
-        say $frobnicator.hash.elems;
-        sleep .1;
-    }
+until $frobnicator.hash.elems == @words.elems {
+    say $frobnicator.hash.elems;
+    sleep .1;
 }
 
 =end code
