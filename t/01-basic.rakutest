@@ -1,0 +1,26 @@
+use Test;
+use Method::Protected;
+
+plan 1;
+
+my @words = "a" … "zzz";
+
+class Frobnicate {
+    has %!hash;
+    method pick() is protected { %!hash{@words.pick}++ }
+    method hash() is protected { %!hash.clone          }
+}
+
+# Set up 3 threads massively updating a single hash
+my $frobnicator = Frobnicate.new;
+start { loop { $frobnicator.pick } }
+start { loop { $frobnicator.pick } }
+start { loop { $frobnicator.pick } }
+
+# Wait until all words have been done at least once, without
+# eating away all CPU
+sleep .1 until $frobnicator.hash.elems == @words.elems;
+
+pass "Survived hammering a hash";
+
+# vim: expandtab shiftwidth=4

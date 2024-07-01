@@ -1,0 +1,25 @@
+{
+  "auth": "zef:lizmat",
+  "authors": [
+    "Elizabeth Mattijsen"
+  ],
+  "build-depends": [
+  ],
+  "depends": [
+  ],
+  "description": "add \"is protected\" trait to methods",
+  "license": "Artistic-2.0",
+  "name": "Method::Protected",
+  "perl": "6.d",
+  "provides": {
+    "Method::Protected": "lib/Method/Protected.rakumod"
+  },
+  "resources": [
+  ],
+  "source-url": "https://github.com/lizmat/Method-Protected.git",
+  "tags": [ "RACE", "LOCK", "MONITOR"
+  ],
+  "test-depends": [
+  ],
+  "version": "0.0.1"
+}
