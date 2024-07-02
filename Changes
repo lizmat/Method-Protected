@@ -3,7 +3,7 @@ Revision history for Method::Protected
 {{$NEXT}}
 
 0.0.2  2024-07-02T11:24:27+02:00
-    - Make sure the wrapper "is raw" so that any conainers that are
+    - Make sure the wrapper "is raw" so that any containers that are
       returned, can actually be assigned to
     - Add more tests
     - Fix badge and add sponsor button
