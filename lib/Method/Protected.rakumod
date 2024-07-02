@@ -14,7 +14,7 @@ my multi sub trait_mod:<is>(Method:D $method, :$protected!) is export {
 
     # Install the wrapper
     my $name := $method.name;
-    $method.wrap: my method (|c) {
+    $method.wrap: my method (|c) is raw {
         my &original = nextcallee;
         self.LOCK.protect: { original(self, |c) }
     }

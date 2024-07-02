@@ -1,7 +1,7 @@
 use Test;
 use Method::Protected;
 
-plan 2;
+plan 3;
 
 my @words = "a" … "zzz";
 
@@ -29,7 +29,8 @@ class Grabonize {
     multi method pick(Int) { %!hash{@words.pick}++ }
     multi method pick(Str) { %!hash{@words.pick}++ }
     multi method pick(Rat) { %!hash{@words.pick}++ }
-    method hash() is protected { %!hash.clone          }
+    method it(str $key) is raw is protected { %!hash{$key} }
+    method hash() is protected { %!hash.clone }
 }
 
 # Set up 3 threads massively updating a single hash
@@ -43,5 +44,8 @@ start { loop { $grabonizer.pick(1.37)  } }
 sleep .1 until $grabonizer.hash.elems == @words.elems;
 
 pass "Survived hammering a hash with Grabonize";
+
+my $value = $grabonizer.it("zzz")++;
+is $grabonizer.it("zzz"), $value + 1, 'can we increment';
 
 # vim: expandtab shiftwidth=4

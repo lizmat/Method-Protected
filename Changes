@@ -2,5 +2,11 @@ Revision history for Method::Protected
 
 {{$NEXT}}
 
+0.0.2  2024-07-02T11:24:27+02:00
+    - Make sure the wrapper "is raw" so that any conainers that are
+      returned, can actually be assigned to
+    - Add more tests
+    - Fix badge and add sponsor button
+
 0.0.1  2024-07-01T15:22:17+02:00
     - Initial version
