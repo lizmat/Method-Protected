@@ -43,6 +43,13 @@ THEORY OF OPERATION
 
 When the trait is applied on a method, the class of the method id checked whether it already has a `$!LOCK` attribute. If not, then that attribute is added, and the associated accessor method `LOCK` is also added. Then the method will be [wrapped](https://docs.raku.org/routine/wrap) with code that will protect the execution of the original body of the method.
 
+A NOTE OF CAUTION
+=================
+
+If the method being protected has an `is raw` or `is rw` trait set, then the protected version will also have that set. However, this is usually used to return a container, which can potentially cause a race-condition **outside** of the protected method because the container **may** contain logic that would execute code in a non-threadsafe manner (e.g. in the autovivification of keys in a hash).
+
+So only is `is raw` or `is rw` on protected methods if you **really** know what you're doing. Generally spoken: don't do that! If you think you need to do this, first find another way to structure your code, e.g. by using [`hyper`](https://docs.raku.org/type/Iterable#method_hyper).
+
 AUTHOR
 ======
 

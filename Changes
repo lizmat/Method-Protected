@@ -2,6 +2,12 @@ Revision history for Method::Protected
 
 {{$NEXT}}
 
+0.0.3  2024-07-03T15:00:52+02:00
+    - Only make the wrapper "is raw" if the wrapped method is also
+      "is raw"
+    - Added a Note of Caution, about returning containers from
+      protected methods
+
 0.0.2  2024-07-02T11:24:27+02:00
     - Make sure the wrapper "is raw" so that any containers that are
       returned, can actually be assigned to

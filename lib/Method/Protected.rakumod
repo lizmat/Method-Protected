@@ -1,3 +1,12 @@
+my &protected = my method (|c) {
+    my &original = nextcallee;
+    self.LOCK.protect: { original(self, |c) }
+}
+my &protected-raw = my method (|c) is raw {
+    my &original = nextcallee;
+    self.LOCK.protect: { original(self, |c) }
+}
+
 my multi sub trait_mod:<is>(Method:D $method, :$protected!) is export {
     my $package := $method.package;
 
@@ -12,12 +21,9 @@ my multi sub trait_mod:<is>(Method:D $method, :$protected!) is export {
         }
     }
 
-    # Install the wrapper
+    # Install the correct wrapper
     my $name := $method.name;
-    $method.wrap: my method (|c) is raw {
-        my &original = nextcallee;
-        self.LOCK.protect: { original(self, |c) }
-    }
+    $method.wrap: $method.rw ?? &protected-raw.clone !! &protected.clone;
 
     # Make the adapted method self-identify with the correct name
     $method.^set_name($name);
@@ -76,6 +82,20 @@ whether it already has a C<$!LOCK> attribute.  If not, then that attribute
 is added, and the associated accessor method C<LOCK> is also added.  Then
 the method will be L<wrapped|https://docs.raku.org/routine/wrap> with code
 that will protect the execution of the original body of the method.
+
+=head1 A NOTE OF CAUTION
+
+If the method being protected has an C<is raw> or C<is rw> trait set, then
+the protected version will also have that set.  However, this is usually
+used to return a container, which can potentially cause a race-condition
+B<outside> of the protected method because the container B<may> contain
+logic that would execute code in a non-threadsafe manner (e.g. in the
+autovivification of keys in a hash).
+
+So only is C<is raw> or C<is rw> on protected methods if you B<really>
+know what you're doing.  Generally spoken: don't do that!  If you think
+you need to do this, first find another way to structure your code,
+e.g. by using L<C<hyper>|https://docs.raku.org/type/Iterable#method_hyper>.
 
 =head1 AUTHOR
 
