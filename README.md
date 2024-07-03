@@ -48,7 +48,7 @@ A NOTE OF CAUTION
 
 If the method being protected has an `is raw` or `is rw` trait set, then the protected version will also have that set. However, this is usually used to return a container, which can potentially cause a race-condition **outside** of the protected method because the container **may** contain logic that would execute code in a non-threadsafe manner (e.g. in the autovivification of keys in a hash).
 
-So only is `is raw` or `is rw` on protected methods if you **really** know what you're doing. Generally spoken: don't do that! If you think you need to do this, first find another way to structure your code, e.g. by using [`hyper`](https://docs.raku.org/type/Iterable#method_hyper).
+So only use `is raw` or `is rw` on protected methods if you **really** know what you're doing. Generally spoken: don't do that! If you think you need to do this, first find another way to structure your code, e.g. by using [`hyper`](https://docs.raku.org/type/Iterable#method_hyper).
 
 AUTHOR
 ======

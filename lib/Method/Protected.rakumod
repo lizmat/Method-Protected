@@ -92,7 +92,7 @@ B<outside> of the protected method because the container B<may> contain
 logic that would execute code in a non-threadsafe manner (e.g. in the
 autovivification of keys in a hash).
 
-So only is C<is raw> or C<is rw> on protected methods if you B<really>
+So only use C<is raw> or C<is rw> on protected methods if you B<really>
 know what you're doing.  Generally spoken: don't do that!  If you think
 you need to do this, first find another way to structure your code,
 e.g. by using L<C<hyper>|https://docs.raku.org/type/Iterable#method_hyper>.
