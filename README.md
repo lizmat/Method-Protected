@@ -34,7 +34,7 @@ until $frobnicator.hash.elems == @words.elems {
 DESCRIPTION
 ===========
 
-Method::Protected provides an `is protected` trait to methods in a class. If applied to a method, all calls to that method will be protected by a [Lock](https://docs.raku.org/type/Lock), making sure that any other method call to this method (or any other method protected by the trait) from another thread, will block until the call is finished.
+The `Method::Protected` distribution provides an `is protected` trait to methods in a class. If applied to a method, all calls to that method will be protected by a [Lock](https://docs.raku.org/type/Lock), making sure that any other method call to this method (or any other method protected by the trait) from another thread, will block until the call is finished.
 
 Functionally this is similar to what the [OO::Monitor](https://raku.land/cpan:JNTHN/OO::Monitors) does, except that with this module this logic is only applied to methods that actuall have the `is protected` trait applied.
 
@@ -62,7 +62,7 @@ If you like this module, or what I’m doing more generally, committing to a [sm
 COPYRIGHT AND LICENSE
 =====================
 
-Copyright 2024 Elizabeth Mattijsen
+Copyright 2024, 2025 Elizabeth Mattijsen
 
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
 

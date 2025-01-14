@@ -1,3 +1,4 @@
 .precomp/
 /Method/Also/-*
 /releases/
+*.rakucov
