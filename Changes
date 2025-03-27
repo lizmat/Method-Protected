@@ -1,6 +1,9 @@
 Revision history for Method::Protected
 
 {{$NEXT}}
+    - Add error message if "is protected" is applied to a method in
+      a role: this is currently not supported
+    - Update copyright year
 
 0.0.3  2024-07-03T15:00:52+02:00
     - Only make the wrapper "is raw" if the wrapped method is also

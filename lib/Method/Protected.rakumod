@@ -10,6 +10,10 @@ my &protected-raw = my method (|c) is raw {
 my multi sub trait_mod:<is>(Method:D $method, :$protected!) is export {
     my $package := $method.package;
 
+    my $name := $method.name;
+    die "Cannot apply 'is protected' to method '$name' in a role"
+      unless $package.HOW.WHAT =:= Metamodel::ClassHOW;
+
     # Did not install lock logic yet
     unless $package.^attributes.first(*.name eq '$!LOCK') {
         my $attribute := Attribute.new(:name<$!LOCK>, :type(Lock), :$package);
@@ -22,7 +26,6 @@ my multi sub trait_mod:<is>(Method:D $method, :$protected!) is export {
     }
 
     # Install the correct wrapper
-    my $name := $method.name;
     $method.wrap: $method.rw ?? &protected-raw.clone !! &protected.clone;
 
     # Make the adapted method self-identify with the correct name

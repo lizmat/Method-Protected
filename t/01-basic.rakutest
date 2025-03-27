@@ -1,7 +1,7 @@
 use Test;
 use Method::Protected;
 
-plan 3;
+plan 4;
 
 my @words = "a" … "zzz";
 
@@ -45,7 +45,13 @@ sleep .1 until $grabonizer.hash.elems == @words.elems;
 
 pass "Survived hammering a hash with Grabonize";
 
+# Test containers on protected methods
 my $value = $grabonizer.it("zzz")++;
 is $grabonizer.it("zzz"), $value + 1, 'can we increment';
+
+# Make sure adequate message when applied to methods in roles
+throws-like { 'role A { method b is protected { } }'.EVAL },
+  X::AdHoc,
+  message => "Cannot apply 'is protected' to method 'b' in a role";
 
 # vim: expandtab shiftwidth=4
