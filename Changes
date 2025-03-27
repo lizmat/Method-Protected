@@ -1,6 +1,8 @@
 Revision history for Method::Protected
 
 {{$NEXT}}
+
+0.0.4  2025-03-27T18:50:25+01:00
     - Add error message if "is protected" is applied to a method in
       a role: this is currently not supported
     - Update copyright year
