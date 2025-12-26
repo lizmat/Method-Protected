@@ -47,7 +47,7 @@ the C<is protected> trait applied.
 
 =head1 THEORY OF OPERATION
 
-When the trait is applied on a method, the class of the method id checked
+When the trait is applied on a method, the class of the method is checked
 whether it already has a C<$!LOCK> attribute.  If not, then that attribute
 is added, and the associated accessor method C<LOCK> is also added.  Then
 the method will be L<wrapped|https://docs.raku.org/routine/wrap> with code

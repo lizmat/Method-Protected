@@ -41,7 +41,7 @@ Functionally this is similar to what the [OO::Monitor](https://raku.land/cpan:JN
 THEORY OF OPERATION
 ===================
 
-When the trait is applied on a method, the class of the method id checked whether it already has a `$!LOCK` attribute. If not, then that attribute is added, and the associated accessor method `LOCK` is also added. Then the method will be [wrapped](https://docs.raku.org/routine/wrap) with code that will protect the execution of the original body of the method.
+When the trait is applied on a method, the class of the method is checked whether it already has a `$!LOCK` attribute. If not, then that attribute is added, and the associated accessor method `LOCK` is also added. Then the method will be [wrapped](https://docs.raku.org/routine/wrap) with code that will protect the execution of the original body of the method.
 
 A NOTE OF CAUTION
 =================
